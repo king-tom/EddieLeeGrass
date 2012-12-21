@@ -19,16 +19,12 @@ cbuffer MatrixBuffer
 //////////////
 struct VertexInputType
 {
-    float4 position : POSITION;
-	float2 tex : TEXCOORD0;
-	float4 normal : NORMAL;
+    float3 position : POSITION;
 };
 
 struct PixelInputType
 {
     float4 position : SV_POSITION;
-	float2 tex : TEXCOORD0;
-	float4 normal : NORMAL;
 };
 
 
@@ -36,11 +32,7 @@ PixelInputType main( VertexInputType input )
 {
 	PixelInputType output;
 
-	// Change the position vector to be 4 units for proper matrix calculations.
-    input.position.w = 1.0f;
-
-	output.position = input.position;
-	output.tex = float2(0,0);
+	output.position = float4(input.position.x, input.position.y, input.position.z, 1.0f);
 
     return output;
 }

@@ -1059,7 +1059,8 @@ void CQuadTree::RenderScene(ID3D11DeviceContext *deviceContext,
 			light->GetDiffuseColor(), 
 			light->GetDirection(), 
 			terrain->GetTexture(), 
-			cameraDirection);
+			cameraDirection,
+			D3DXVECTOR2( cameraLocation.x, cameraLocation.z ) );
 
 
 		// Turn off blending.

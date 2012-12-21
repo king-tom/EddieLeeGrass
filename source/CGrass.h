@@ -16,10 +16,7 @@ public:
 
 	struct VertexType
 	{
-		D3DXVECTOR4 position;
-		D3DXVECTOR2 texture;
-	    D3DXVECTOR4 normal;
-		D3DXVECTOR4 color;
+		D3DXVECTOR3 position;
 	};
 
 	CGrass::CGrass( const int );

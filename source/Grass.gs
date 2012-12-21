@@ -14,8 +14,6 @@ cbuffer MatrixBuffer
 struct PixelInputType
 {
     float4 position : SV_POSITION;
-	float2 tex : TEXCOORD0;
-	float4 normal : NORMAL;
 	//float4 v4Diffuse : COLOR;
 };
 
@@ -44,14 +42,6 @@ static const int	NumSegs[3] = { 5, 3, 2 };
 
 static const float kWindCoeff = 87.0f; // Multiplies by navier wind
 static const float kHeightDelta = 0.127f;
-
-// Final stage of GS. Prepare vert to be sent into PS
-void PrepareVertForPS( inout PixelInputType vert )
-{
-	vert.normal = normalize( vert.normal );
-	vert.position = mul( mul( mul( vert.position, worldMatrix ), viewMatrix ), projectionMatrix );
-
-}
 
 float GetRandSeed( float3 rootPos )
 {
@@ -150,7 +140,7 @@ PixelOutputType GetGrassVert( GrassBladeData blade, int LOD, int seg, int posHor
 	// Height - decrease based on distance from camera
 	float heightDistScale = distance( blade.rootPosWorldSpace, cameraLocation );
 	heightDistScale = clamp( ( heightDistScale - 100.0 ) / 100.0, 0, 1 );
-	heightDistScale = 1.0 - heightDistScale;
+	heightDistScale = 1;//1.0 - heightDistScale;
 	
 	// Grass blades in the dist must be thicker
 	float grassWidth = lerp( kGrassWidth * 2.0, kGrassWidth, heightDistScale );
@@ -249,6 +239,9 @@ void BuildBlade_LOD0( float3 rootPos, inout TriangleStream<PixelOutputType> TriS
 		GetRandSeed( rootPos ),
 		planeData
 	};
+		
+	//if( blade.randSeed < .3 )
+	//	return;
 
 	PixelOutputType vertices[ numVertsPerBlade ];
 	
@@ -312,7 +305,7 @@ void BuildBlade_LOD1( float3 rootPos, inout TriangleStream<PixelOutputType> TriS
 	
 	// Blade Data
 	GrassBladeData blade = {
-		{ sin(rootPos.x), 0, cos(rootPos.y) }, // grass direction
+		{ abs(sin(rootPos.x*rand)), 0, abs(cos(rootPos.y*rand)) }, // grass direction
 		rootPos, // object space
 		float3( TerrainOffset.x + rootPos.x, GetHeight( rootPos ), TerrainOffset.z + rootPos.z ),
 		GetWindForce( rootPos ),
@@ -320,6 +313,8 @@ void BuildBlade_LOD1( float3 rootPos, inout TriangleStream<PixelOutputType> TriS
 		planeData
 	};
 	
+	//if( blade.randSeed < .9 )
+	//	return;
 
 	PixelOutputType vertices[ numVertsPerBlade ];
 	
@@ -383,14 +378,14 @@ void BuildBlade_LOD2( float3 rootPos, inout TriangleStream<PixelOutputType> TriS
 	
 	// Blade Data
 	GrassBladeData blade = {
-		{ sin(rootPos.x), 0, cos(rootPos.y) }, // grass direction
+		{ abs(sin(rootPos.x*rand)), 0, abs(cos( rootPos.y*rand ) ) }, // grass direction
 		rootPos, // object space
 		float3( TerrainOffset.x + rootPos.x, GetHeight( rootPos ), TerrainOffset.z + rootPos.z ),
 		GetWindForce( rootPos ),
 		GetRandSeed( rootPos ),
 		planeData
 	};
-	
+
 	PixelOutputType vertices[ numVertsPerBlade ];
 	
 	// Append to the triangle strip
@@ -459,21 +454,27 @@ void main( point PixelInputType input[1], inout TriangleStream< PixelOutputType 
 
 	float grassPlaneHeight = GetHeight( float3( input[0].position.x, input[0].position.y, input[0].position.z ) );
 
-	float distanceLOD = distance( cameraLocation, input[0].position + TerrainOffset );
+	float distanceLOD = distance( float2(cameraLocation.x, cameraLocation.z), float2(input[0].position.x + TerrainOffset.x, input[0].position.z + TerrainOffset.z) );
 	
-	if( distanceLOD <= 10.0f )
+	float draw = GetRandSeed(input[0].position);
+
+	if( distanceLOD <= 7.0f )
 	{
 		BuildBlade_LOD0( input[0].position, output );
 	}
-	else if( distanceLOD > 10.0f && distanceLOD <= 25.0f )
+	else if( distanceLOD > 7.0f && distanceLOD <= 20.0f )
 	{
+		//if(draw < .25)		cutting off by draw will probably be ineffective for improving performance until rand is sent through its own cbuffer
+		//	return;
 		BuildBlade_LOD1( input[0].position, output );
 	}
-	else if( distanceLOD > 25.0f && distanceLOD <= 100.0f )
+	else if( distanceLOD > 20.0f && distanceLOD <= 100.0f )
 	{
+		if(draw < .7)
+			return;
 		BuildBlade_LOD2( input[0].position, output );
-	}
-	
+	}	
+
 	output.RestartStrip();
 }
 

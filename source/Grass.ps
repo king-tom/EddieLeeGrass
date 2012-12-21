@@ -105,7 +105,7 @@ PsOutput PsTransparencyAA( PixelInputType input )
 float4 main( PixelInputType input ) : SV_TARGET
 {
 	float4 alpha = grassAlphaTexture.Sample(SampleType, input.tex);
-	clip( (alpha < .5) ? -1 : 1 );
+	//clip( (alpha < .5) ? -1 : 1 );
 
 	float4 textureColor;
 	float3 lightDir;
@@ -122,7 +122,7 @@ float4 main( PixelInputType input ) : SV_TARGET
 	static const float4 gold = {0.8549f, 0.43137f, 0, 1};
 	static const float4 autumnTint = {0.8549f, 0.23137f, 0, 1};
 	static const float4 skyBlue = {.502, .859, .933, 1};
-	static const float4 greenGrass = {.502, .859, .433, 1};
+	static const float4 greenGrass = {.302, .959, .333, 1};
 
 	float4 normalu = input.normal;//normalize( input.normal );
 	normalu =  dot( normalu, lightPos ); 
@@ -133,7 +133,7 @@ float4 main( PixelInputType input ) : SV_TARGET
 	// Autumn Grass
 	//
 	/*
-	float texy = .25-input.tex.y;
+	float texy = .35-input.tex.y;
 	if( texy < 0 )
 		texy = 0;
 	float4 goldCoeff = lerp(float4(0,0,0,1), gold, pow(normalu,5) * float4(texy, texy, texy,1)*1.6);
@@ -142,7 +142,7 @@ float4 main( PixelInputType input ) : SV_TARGET
 
 	finalColor = finalColor * camDir * ( lerp( autumnTint, tint, input.rand ) );
 		
-	finalColor = lerp( finalColor+.045, goldCoeff, 1 - ( ( gold - goldCoeff ) / gold ) );
+	finalColor = lerp( finalColor+.017, goldCoeff, 1 - ( ( gold - goldCoeff ) / gold ) );
 	*/
 	/////////////////////////////////////////
 	// Summer(blue sky) Grass
@@ -169,29 +169,29 @@ float4 main( PixelInputType input ) : SV_TARGET
 		texy = 0;
 	float4 greenGrassCoeff = lerp(float4(0,0,0,1), greenGrass, pow(normalu,5) * float4(texy, texy, texy,1)*1.6);
 	
-	float4 finalColor = floorShade * textureColor;
+	float4 finalColor = floorShade * .7 * textureColor;
 
-	finalColor = finalColor * camDir * ( lerp( tint + .1, float4( 1, 1, 1, 1 ), input.rand ) );
+	finalColor = finalColor * camDir * ( lerp( tint, float4( 1, 1, 1, 1 ), input.rand ) );
 		
-	finalColor = lerp( finalColor+.005, greenGrassCoeff, 1 - ( ( greenGrass - greenGrassCoeff ) / greenGrass ) );
+	finalColor = lerp( finalColor, greenGrassCoeff, 1 - ( ( greenGrass - greenGrassCoeff ) / greenGrass ) );
 	*/
 
 	/////////////////////////////////////////
 	// Green Grass with Autumn Tips
 	//
 	
-	float texy = .25-input.tex.y;
+	float texy = .3-input.tex.y;
 	if( texy < 0 )
 		texy = 0;
 	float4 goldCoeff = lerp(float4(0,0,0,1), gold, pow(normalu,5) * float4(texy, texy, texy,1)*1.6);
 	
 	float4 finalColor = floorShade * textureColor;
 
-	finalColor = finalColor * camDir * ( lerp( tint + .1, float4( 1, 1, 1, 1 ), input.rand ) );
+	finalColor = finalColor * camDir * ( lerp( tint, float4( 1, 1, 1, 1 ), input.rand ) );
 		
 	finalColor = lerp( finalColor, goldCoeff, 1 - ( ( gold - goldCoeff ) / gold ) );
 	
-    return float4( finalColor.x, finalColor.y, finalColor.z, alpha.x );
+    return float4( finalColor.x, finalColor.y, finalColor.z, alpha.x);
 	
 }
 

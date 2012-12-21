@@ -61,11 +61,8 @@ bool CGrass::InitializeBuffers( ID3D11Device *device )
 
 	for( ; m_vertexCount < m_numberOfBlades - 1; )
 	{
-		D3DXVECTOR4 vec = D3DXVECTOR4( ( ( RAND_MAX - (float)rand() ) / RAND_MAX ) * 8 , 0.0,  ( ( RAND_MAX - (float)rand() ) / RAND_MAX ) * 8, 1.f );
+		D3DXVECTOR3 vec = D3DXVECTOR3( ( ( RAND_MAX - (float)rand() ) / RAND_MAX ) * 8 , 0.0,  ( ( RAND_MAX - (float)rand() ) / RAND_MAX ) * 8 );
 		m_vertices[m_vertexCount].position = vec;
-		m_vertices[m_vertexCount].texture = D3DXVECTOR2(0,0);
-		m_vertices[m_vertexCount].normal = D3DXVECTOR4(0,0,0,0);
-		m_vertices[m_vertexCount].color = D3DXVECTOR4(0,0,0,0);
 		indices[m_vertexCount] = m_vertexCount;
 		m_vertexCount++;
 	}

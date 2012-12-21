@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{F22C1AC3-C15B-4250-8CF7-513B36DE5285}</ProjectGuid>
+    <RootNamespace>TerrainTutorial12</RootNamespace>
+    <ProjectName>LeeGrass</ProjectName>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>MultiByte</CharacterSet>
+    <PlatformToolset>v110</PlatformToolset>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
+      <AdditionalIncludeDirectories>E:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Samples\C++\Effects11\Inc;E:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;E:\dev\LeeGrass\source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>E:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;E:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Samples\C++\Effects11\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>Effects11.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Disabled</Optimization>
+      <TreatWChar_tAsBuiltInType>false</TreatWChar_tAsBuiltInType>
+      <AdditionalIncludeDirectories>E:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Samples\C++\Effects11\Inc;E:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;E:\dev\LeeGrass\source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);x64</PreprocessorDefinitions>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <AdditionalLibraryDirectories>E:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>d3d11.lib;d3dx11.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>MaxSpeed</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>E:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Samples\C++\Effects11\Inc;E:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;E:\dev\LeeGrass\source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>E:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x86;E:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Samples\C++\Effects11\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <Optimization>Full</Optimization>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <AdditionalIncludeDirectories>E:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Samples\C++\Effects11\Inc;E:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Include;E:\dev\LeeGrass\source;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_MBCS;%(PreprocessorDefinitions);x64</PreprocessorDefinitions>
+      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+      <OmitFramePointers>true</OmitFramePointers>
+      <EnableFiberSafeOptimizations>true</EnableFiberSafeOptimizations>
+    </ClCompile>
+    <Link>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>E:\Program Files %28x86%29\Microsoft DirectX SDK %28June 2010%29\Lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>d3d11.lib;d3dx11.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClInclude Include="..\..\source\CApp.h" />
+    <ClInclude Include="..\..\source\CCamera.h" />
+    <ClInclude Include="..\..\source\CCPU.h" />
+    <ClInclude Include="..\..\source\CDepthOfField.h" />
+    <ClInclude Include="..\..\source\CDirect3DSystem.h" />
+    <ClInclude Include="..\..\source\CFont.h" />
+    <ClInclude Include="..\..\source\CFontShader.h" />
+    <ClInclude Include="..\..\source\CFPS.h" />
+    <ClInclude Include="..\..\source\CFrustum.h" />
+    <ClInclude Include="..\..\source\CGrass.h" />
+    <ClInclude Include="..\..\source\CGrassShader.h" />
+    <ClInclude Include="..\..\source\CInput.h" />
+    <ClInclude Include="..\..\source\CLight.h" />
+    <ClInclude Include="..\..\source\CPerlinNoise.h" />
+    <ClInclude Include="..\..\source\CPosition.h" />
+    <ClInclude Include="..\..\source\CQuadTree.h" />
+    <ClInclude Include="..\..\source\CQuadTreeShader.h" />
+    <ClInclude Include="..\..\source\CSkyDome.h" />
+    <ClInclude Include="..\..\source\CSkydomeShader.h" />
+    <ClInclude Include="..\..\source\CSkyplane.h" />
+    <ClInclude Include="..\..\source\CSkyplaneShader.h" />
+    <ClInclude Include="..\..\source\CSystem.h" />
+    <ClInclude Include="..\..\source\CTerrain.h" />
+    <ClInclude Include="..\..\source\CTerrainShader.h" />
+    <ClInclude Include="..\..\source\CText.h" />
+    <ClInclude Include="..\..\source\CTexture.h" />
+    <ClInclude Include="..\..\source\CTimer.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\..\source\CApp.cpp" />
+    <ClCompile Include="..\..\source\CCamera.cpp" />
+    <ClCompile Include="..\..\source\CCPU.cpp" />
+    <None Include="..\..\source\CDepthOfField.cpp" />
+    <ClCompile Include="..\..\source\CDirect3DSystem.cpp" />
+    <ClCompile Include="..\..\source\CFont.cpp" />
+    <ClCompile Include="..\..\source\CFontShader.cpp" />
+    <ClCompile Include="..\..\source\CFPS.cpp" />
+    <ClCompile Include="..\..\source\CFrustum.cpp" />
+    <ClCompile Include="..\..\source\CGrass.cpp" />
+    <ClCompile Include="..\..\source\CGrassShader.cpp" />
+    <ClCompile Include="..\..\source\CInput.cpp" />
+    <ClCompile Include="..\..\source\CLight.cpp" />
+    <ClCompile Include="..\..\source\CQuadTree.cpp" />
+    <ClCompile Include="..\..\source\CQuadTreeShader.cpp" />
+    <ClCompile Include="..\..\source\main.cpp" />
+    <ClCompile Include="..\..\source\CPerlinNoise.cpp" />
+    <ClCompile Include="..\..\source\CPosition.cpp" />
+    <ClCompile Include="..\..\source\CSkydome.cpp" />
+    <ClCompile Include="..\..\source\CSkydomeShader.cpp" />
+    <ClCompile Include="..\..\source\CSkyplane.cpp" />
+    <ClCompile Include="..\..\source\CSkyplaneShader.cpp" />
+    <ClCompile Include="..\..\source\CSystem.cpp" />
+    <ClCompile Include="..\..\source\CTerrain.cpp" />
+    <ClCompile Include="..\..\source\CTerrainShader.cpp" />
+    <ClCompile Include="..\..\source\CText.cpp" />
+    <ClCompile Include="..\..\source\CTexture.cpp" />
+    <ClCompile Include="..\..\source\CTimer.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\source\Font.ps" />
+    <None Include="..\..\source\Font.vs" />
+    <None Include="..\..\source\QuadTerrain.gs" />
+    <None Include="..\..\source\QuadTerrain.ps" />
+    <None Include="..\..\source\QuadTerrain.vs" />
+    <None Include="..\..\source\Skydome.ps" />
+    <None Include="..\..\source\Skydome.vs" />
+    <None Include="..\..\source\Skyplane.ps" />
+    <None Include="..\..\source\Skyplane.vs" />
+    <None Include="..\..\source\Terrain.ps" />
+    <None Include="..\..\source\Terrain.vs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\source\Grass.ps">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Pixel</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Pixel</ShaderType>
+      <FileType>Document</FileType>
+    </None>
+    <None Include="..\..\source\Grass.vs">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Vertex</ShaderType>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Vertex</ShaderType>
+      <FileType>Document</FileType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\..\source\Grass.gs" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>

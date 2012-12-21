@@ -61,13 +61,24 @@ bool CTerrainShader::Render( ID3D11DeviceContext* deviceContext,
 							D3DXVECTOR4 diffuseColor,
 							D3DXVECTOR3 lightDirection, 
 							ID3D11ShaderResourceView* texture,
-							D3DXVECTOR3 cameraDirection )
+							D3DXVECTOR3 cameraDirection,
+							D3DXVECTOR2 cameraLocationXZ )
 {
 	bool result;
 
 
 	// Set the shader parameters that it will use for rendering.
-	result = SetShaderParameters( deviceContext, worldMatrix, viewMatrix, projectionMatrix, ambientColor, diffuseColor, lightDirection, texture, cameraDirection );
+	result = SetShaderParameters( deviceContext, 
+		worldMatrix, 
+		viewMatrix, 
+		projectionMatrix, 
+		ambientColor, 
+		diffuseColor, 
+		lightDirection, 
+		texture, 
+		cameraDirection,
+		cameraLocationXZ);
+
 	if(!result)
 	{
 		return false;
@@ -373,7 +384,8 @@ bool CTerrainShader::SetShaderParameters( ID3D11DeviceContext* deviceContext,
 										 D3DXVECTOR4 diffuseColor, 
 										 D3DXVECTOR3 lightDirection, 
 										 ID3D11ShaderResourceView* texture,  
-										 D3DXVECTOR3 &cameraDirection )
+										 D3DXVECTOR3 &cameraDirection,
+										 D3DXVECTOR2 cameraLocationXZ )
 {
 	HRESULT result;
     D3D11_MAPPED_SUBRESOURCE mappedResource;
@@ -403,7 +415,8 @@ bool CTerrainShader::SetShaderParameters( ID3D11DeviceContext* deviceContext,
 	dataPtr->world = worldMatrix;
 	dataPtr->view = viewMatrix;
 	dataPtr->projection = projectionMatrix;
-
+	dataPtr->cameraLocationXZ = cameraLocationXZ;
+	dataPtr->padding = D3DXVECTOR2( 0, 0 );
 	// Unlock the constant buffer.
     deviceContext->Unmap( m_matrixBuffer, 0 );
 
@@ -428,8 +441,7 @@ bool CTerrainShader::SetShaderParameters( ID3D11DeviceContext* deviceContext,
 	dataPtr2->diffuseColor = diffuseColor;
 	dataPtr2->lightDirection = lightDirection;
 	dataPtr2->cameraDirection = cameraDirection;
-	dataPtr2->padding[0] = 0.0f;
-	dataPtr2->padding[1] = 0.0f;
+	dataPtr2->cameraLocationXZ = cameraLocationXZ;
 
 	// Unlock the constant buffer.
 	deviceContext->Unmap( m_lightBuffer, 0 );

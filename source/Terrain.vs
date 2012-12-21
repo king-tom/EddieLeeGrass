@@ -12,6 +12,8 @@ cbuffer MatrixBuffer
 	matrix worldMatrix;
 	matrix viewMatrix;
 	matrix projectionMatrix;
+	float2 cameraLocationXZ;
+	float2 padding;
 };
 
 
@@ -32,6 +34,7 @@ struct PixelInputType
 	float2 tex : TEXCOORD0;
 	float3 normal : NORMAL;
 	float4 color : COLOR;
+	float4 lerpParam : POSITION;
 };
 
 
@@ -45,6 +48,9 @@ PixelInputType TerrainVertexShader(VertexInputType input)
 
 	// Change the position vector to be 4 units for proper matrix calculations.
     input.position.w = 1.0f;
+
+	output.lerpParam = lerp( float4( .2, .2, .2, 1 ), float4( .8, .9, .8, 1 ), 
+	1 - ( 200 - distance( cameraLocationXZ, float2(input.position.x, input.position.z ) ) ) / 200 );
 
 	// Calculate the position of the vertex against the world, view, and projection matrices.
     output.position = mul(input.position, worldMatrix);
