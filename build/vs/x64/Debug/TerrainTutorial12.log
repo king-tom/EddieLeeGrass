@@ -1,0 +1,17 @@
+﻿Build started 12/21/2012 12:41:47 AM.
+     1>Project "E:\dev\LeeGrass\build\vs\TerrainTutorial12.vcxproj" on node 2 (Build target(s)).
+     1>InitializeBuildStatus:
+         Creating "x64\Debug\LeeGrass.unsuccessfulbuild" because "AlwaysCreate" was specified.
+       ClCompile:
+         All outputs are up-to-date.
+       Link:
+         All outputs are up-to-date.
+         TerrainTutorial12.vcxproj -> E:\dev\LeeGrass\build\vs\x64\Debug\LeeGrass.exe
+       FinalizeBuildStatus:
+         Deleting file "x64\Debug\LeeGrass.unsuccessfulbuild".
+         Touching "x64\Debug\LeeGrass.lastbuildstate".
+     1>Done Building Project "E:\dev\LeeGrass\build\vs\TerrainTutorial12.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.04
