@@ -1,7 +1,7 @@
 #include "CInput.h"
 
 
-InputClass::InputClass()
+CClass::CClass()
 {
 	m_directInput = 0;
 	m_keyboard = 0;
@@ -9,17 +9,17 @@ InputClass::InputClass()
 }
 
 
-InputClass::InputClass(const InputClass& other)
+CClass::CClass(const CClass& other)
 {
 }
 
 
-InputClass::~InputClass()
+CClass::~CClass()
 {
 }
 
 
-bool InputClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidth, int screenHeight)
+bool CClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidth, int screenHeight)
 {
 	HRESULT result;
 
@@ -100,7 +100,7 @@ bool InputClass::Initialize(HINSTANCE hinstance, HWND hwnd, int screenWidth, int
 }
 
 
-void InputClass::Shutdown()
+void CClass::Shutdown()
 {
 	// Release the mouse.
 	if(m_mouse)
@@ -129,7 +129,7 @@ void InputClass::Shutdown()
 }
 
 
-bool InputClass::Frame()
+bool CClass::Frame()
 {
 	bool result;
 
@@ -155,7 +155,7 @@ bool InputClass::Frame()
 }
 
 
-bool InputClass::ReadKeyboard()
+bool CClass::ReadKeyboard()
 {
 	HRESULT result;
 
@@ -179,7 +179,7 @@ bool InputClass::ReadKeyboard()
 }
 
 
-bool InputClass::ReadMouse()
+bool CClass::ReadMouse()
 {
 	HRESULT result;
 
@@ -203,7 +203,7 @@ bool InputClass::ReadMouse()
 }
 
 
-void InputClass::ProcessInput()
+void CClass::ProcessInput()
 {
 	// Update the location of the mouse cursor based on the change of the mouse location during the frame.
 	m_mouseX += m_mouseState.lX;
@@ -220,7 +220,7 @@ void InputClass::ProcessInput()
 }
 
 
-void InputClass::GetMouseLocation(int& mouseX, int& mouseY)
+void CClass::GetMouseLocation(int& mouseX, int& mouseY)
 {
 	mouseX = m_mouseX;
 	mouseY = m_mouseY;
@@ -228,7 +228,7 @@ void InputClass::GetMouseLocation(int& mouseX, int& mouseY)
 }
 
 
-bool InputClass::IsEscapePressed()
+bool CClass::IsEscapePressed()
 {
 	// Do a bitwise and on the keyboard state to check if the escape key is currently being pressed.
 	if(m_keyboardState[DIK_ESCAPE] & 0x80)
@@ -240,7 +240,7 @@ bool InputClass::IsEscapePressed()
 }
 
 
-bool InputClass::IsLeftPressed()
+bool CClass::IsLeftPressed()
 {
 	// Do a bitwise and on the keyboard state to check if the key is currently being pressed.
 	if(m_keyboardState[DIK_A] & 0x80)
@@ -252,7 +252,7 @@ bool InputClass::IsLeftPressed()
 }
 
 
-bool InputClass::IsRightPressed()
+bool CClass::IsRightPressed()
 {
 	// Do a bitwise and on the keyboard state to check if the key is currently being pressed.
 	if(m_keyboardState[DIK_D] & 0x80)
@@ -264,7 +264,7 @@ bool InputClass::IsRightPressed()
 }
 
 
-bool InputClass::IsUpPressed()
+bool CClass::IsUpPressed()
 {
 	// Do a bitwise and on the keyboard state to check if the key is currently being pressed.
 	if(m_keyboardState[DIK_W] & 0x80)
@@ -276,7 +276,7 @@ bool InputClass::IsUpPressed()
 }
 
 
-bool InputClass::IsDownPressed()
+bool CClass::IsDownPressed()
 {
 	// Do a bitwise and on the keyboard state to check if the key is currently being pressed.
 	if(m_keyboardState[DIK_S] & 0x80)
@@ -288,7 +288,7 @@ bool InputClass::IsDownPressed()
 }
 
 
-bool InputClass::IsAPressed()
+bool CClass::IsAPressed()
 {
 	// Do a bitwise and on the keyboard state to check if the key is currently being pressed.
 	if(m_keyboardState[DIK_A] & 0x80)
@@ -300,7 +300,7 @@ bool InputClass::IsAPressed()
 }
 
 
-bool InputClass::IsZPressed()
+bool CClass::IsZPressed()
 {
 	// Do a bitwise and on the keyboard state to check if the key is currently being pressed.
 	if(m_keyboardState[DIK_Z] & 0x80)
@@ -311,8 +311,19 @@ bool InputClass::IsZPressed()
 	return false;
 }
 
+bool CClass::IsXPressed()
+{
+	// Do a bitwise and on the keyboard state to check if the key is currently being pressed.
+	if(m_keyboardState[DIK_X] & 0x80)
+	{
+		return true;
+	}
 
-bool InputClass::IsPgUpPressed()
+	return false;
+}
+
+
+bool CClass::IsPgUpPressed()
 {
 	// Do a bitwise and on the keyboard state to check if the key is currently being pressed.
 	if(m_keyboardState[DIK_PGUP] & 0x80)
@@ -324,7 +335,7 @@ bool InputClass::IsPgUpPressed()
 }
 
 
-bool InputClass::IsPgDownPressed()
+bool CClass::IsPgDownPressed()
 {
 	// Do a bitwise and on the keyboard state to check if the key is currently being pressed.
 	if(m_keyboardState[DIK_PGDN] & 0x80)
@@ -335,7 +346,7 @@ bool InputClass::IsPgDownPressed()
 	return false;
 }
 
-bool InputClass::IsLShiftPressed()
+bool CClass::IsLShiftPressed()
 {
 	// Do a bitwise and on the keyboard state to check if the key is currently being pressed.
 	if(m_keyboardState[DIK_LSHIFT] & 0x80)
@@ -346,7 +357,7 @@ bool InputClass::IsLShiftPressed()
 	return false;
 }
 
-bool InputClass::IsOnePressed()
+bool CClass::IsOnePressed()
 {
 
 	if(m_keyboardState[DIK_1] & 0x80)
@@ -358,7 +369,7 @@ bool InputClass::IsOnePressed()
 
 }
 
-bool InputClass::IsRPressed()
+bool CClass::IsRPressed()
 {
 
 	if(m_keyboardState[DIK_R] & 0x80)
@@ -370,7 +381,7 @@ bool InputClass::IsRPressed()
 
 }
 
-bool InputClass::IsFPressed()
+bool CClass::IsFPressed()
 {
 
 	if(m_keyboardState[DIK_F] & 0x80)

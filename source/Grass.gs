@@ -470,8 +470,8 @@ void main( point PixelInputType input[1], inout TriangleStream< PixelOutputType 
 	}
 	else if( distanceLOD > 20.0f && distanceLOD <= 100.0f )
 	{
-		if(draw < .7)
-			return;
+		//if(draw < .7)
+		//	return;
 		BuildBlade_LOD2( input[0].position, output );
 	}	
 

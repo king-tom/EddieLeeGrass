@@ -42,22 +42,42 @@ public:
 	CGrassShader( const CGrassShader& );
 	~CGrassShader();
 
-	bool Initialize( ID3D11Device*, HWND );
-	void Shutdown();
-	void ToggleWireFrame(ID3D11Device* device);
-	bool Render( ID3D11DeviceContext*, int, D3DXMATRIX, D3DXMATRIX, D3DXMATRIX, D3DXVECTOR4, D3DXVECTOR4, D3DXVECTOR3, D3DXVECTOR3, D3DXVECTOR4, D3DXVECTOR3, unsigned long );
-	void RenderShader( ID3D11DeviceContext*, int );
+	bool Initialize			( ID3D11Device*, HWND );
+	void Shutdown			( );
+	void ToggleWireFrame	( ID3D11Device* device );
+	bool Render( ID3D11DeviceContext*,
+		int,
+		D3DXMATRIX,
+		D3DXMATRIX,
+		D3DXMATRIX,
+		D3DXVECTOR4,
+		D3DXVECTOR4,
+		D3DXVECTOR3,
+		D3DXVECTOR3,
+		D3DXVECTOR4,
+		D3DXVECTOR3, 
+		unsigned long );
+	void RenderShader		( ID3D11DeviceContext*, int );
 	void Frame();
 
-	bool SetShaderParameters( ID3D11DeviceContext*, D3DXMATRIX, D3DXMATRIX, D3DXMATRIX, D3DXVECTOR4, D3DXVECTOR4, D3DXVECTOR3, D3DXVECTOR3, D3DXVECTOR4, D3DXVECTOR3, unsigned long );
+	bool SetShaderParameters( ID3D11DeviceContext*, 
+		D3DXMATRIX, 
+		D3DXMATRIX, 
+		D3DXMATRIX, 
+		D3DXVECTOR4,
+		D3DXVECTOR4,
+		D3DXVECTOR3,
+		D3DXVECTOR3,
+		D3DXVECTOR4, 
+		D3DXVECTOR3, 
+		unsigned long );
 
 private:
-	bool InitializeShader( ID3D11Device*, HWND, char *, char * , char *);
-	void ShutdownShader();
-	void OutputShaderErrorMessage( ID3D10Blob*, HWND, char * );
+	bool InitializeShader			( ID3D11Device*, HWND, char *, char * , char *);
+	void ShutdownShader				( );
+	void OutputShaderErrorMessage	( ID3D10Blob*, HWND, char * );
 
 private:
-	//ID3D11RasterizerState* pRSwireFrame; 
 
 	ID3D11ShaderResourceView* m_grassTexture;
 	ID3D11ShaderResourceView* m_grassAlphaTexture;

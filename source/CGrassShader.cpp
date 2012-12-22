@@ -8,6 +8,7 @@ CGrassShader::CGrassShader()
 	m_layout = 0;
 	m_matrixBuffer = 0;
 	m_Time = 0;
+	m_wireFrame = false;
 	//m_gradientBuffer = 0;
 
 	srand(37);
@@ -545,4 +546,40 @@ void CGrassShader::RenderShader(ID3D11DeviceContext* deviceContext, int indexCou
 	deviceContext->DrawIndexed(indexCount, 0, 0);
 
 	return;
+}
+
+void CGrassShader::ToggleWireFrame( ID3D11Device* device )			//TODO: change to SetFillMode
+{
+	//TODO: timeSinceLastWireFrameToggle;
+
+	m_wireFrame = !m_wireFrame;
+	
+	if( m_wireFrame )
+	{
+		RSWireFrameDesc.FillMode = D3D11_FILL_WIREFRAME;
+		RSWireFrameDesc.CullMode = D3D11_CULL_BACK;
+		RSWireFrameDesc.ScissorEnable = FALSE;
+		RSWireFrameDesc.FrontCounterClockwise = FALSE;
+		RSWireFrameDesc.DepthBias = 0;
+		RSWireFrameDesc.DepthBiasClamp = 0.0f;
+		RSWireFrameDesc.SlopeScaledDepthBias = 0.0f;
+		RSWireFrameDesc.MultisampleEnable = FALSE;
+		RSWireFrameDesc.AntialiasedLineEnable = FALSE;
+	}
+	else
+	{
+		RSWireFrameDesc.FillMode = D3D11_FILL_SOLID;
+		RSWireFrameDesc.CullMode = D3D11_CULL_BACK;
+		RSWireFrameDesc.ScissorEnable = FALSE;
+		RSWireFrameDesc.FrontCounterClockwise = FALSE;
+		RSWireFrameDesc.DepthBias = 0;
+		RSWireFrameDesc.DepthBiasClamp = 0.0f;
+		RSWireFrameDesc.SlopeScaledDepthBias = 0.0f;
+		RSWireFrameDesc.MultisampleEnable = FALSE;
+		RSWireFrameDesc.AntialiasedLineEnable = FALSE;
+	}
+	
+	m_rasterizerState->Release();
+	device->CreateRasterizerState( &RSWireFrameDesc, &m_rasterizerState );
+
 }

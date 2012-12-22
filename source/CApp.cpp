@@ -1,6 +1,3 @@
-////////////////////////////////////////////////////////////////////////////////
-// Filename: CApp.cpp
-////////////////////////////////////////////////////////////////////////////////
 #include "CApp.h"
 
 
@@ -46,7 +43,7 @@ bool CApp::Initialize( HINSTANCE hinstance, HWND hwnd, int screenWidth, int scre
 
 	
 	// Create the input object.  The input object will be used to handle reading the keyboard and mouse input from the user.
-	m_Input = new InputClass;
+	m_Input = new CClass;
 	if( !m_Input )
 	{
 		return false;
@@ -588,13 +585,19 @@ bool CApp::HandleInput(float frameTime)
 	m_Position->MoveBackward(keyDown, mouseX, mouseY, m_Input->IsLShiftPressed());
 
 	keyDown = m_Input->IsOnePressed();
-	if(keyDown)
-		m_TerrainShader->ToggleWireFrame(m_Direct3D->GetDevice());
+	if( keyDown )
+	{
+		m_TerrainShader->ToggleWireFrame( m_Direct3D->GetDevice() );
+		m_GrassShader->ToggleWireFrame( m_Direct3D->GetDevice() );
+	}
 
 	keyDown = m_Input->IsZPressed();
-	if(keyDown)
+	if( keyDown )
 		m_updateCQuadTreeRender = !m_updateCQuadTreeRender;
 
+	keyDown = m_Input->IsXPressed();
+	if( keyDown )
+		m_Camera->SetIsUpdateTerrainHeight();
 
 	keyDown = m_Input->IsRPressed();
 	m_Position->MoveUpward(keyDown);
@@ -608,8 +611,11 @@ bool CApp::HandleInput(float frameTime)
 	keyDown = m_Input->IsPgDownPressed();
 	m_Position->LookDownward(keyDown);
 
-	m_QuadTree->GetHeightAtPointXY(posX, posZ, m_QuadTree->GetRootNode());
-	posY = m_QuadTree->GetHeight()+2;
+	if( m_Camera->IsUpdateTerrainHeight() )
+	{
+		m_QuadTree->GetHeightAtPointXY(posX, posZ, m_QuadTree->GetRootNode());
+		posY = m_QuadTree->GetHeight()+2;
+	}
 
 	rotX += mouseY;
 	rotY += mouseX;

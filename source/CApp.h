@@ -47,7 +47,7 @@ private:
 	bool m_updateCQuadTreeRender;
 
 private:
-	InputClass* m_Input;
+	CClass* m_Input;
 	CDirect3DSystem* m_Direct3D;
 	CCamera* m_Camera;
 	CTerrain* m_Terrain;

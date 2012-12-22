@@ -553,18 +553,11 @@ void CQuadTree::CreateTreeNode(NodeType* node, float positionX, float positionZ,
 	bool result;
 	D3D11_BUFFER_DESC vertexBufferDesc, indexBufferDesc;
     D3D11_SUBRESOURCE_DATA vertexData, indexData;
-
-	//first = new NodeType;
-	//node = new NodeType;
 	
 	// Store the node position and size.
 	node->positionX = positionX;
 	node->positionZ = positionZ;
 	node->width = width;
-
-
-	// Initialize the triangle count to zero for the node.
-	//node->triangleCount = 0;
 
 	// Initialize the vertex and index buffer to null.
 	node->vertexBuffer = 0;
@@ -577,8 +570,6 @@ void CQuadTree::CreateTreeNode(NodeType* node, float positionX, float positionZ,
 	node->nodes[3] = 0;
 
 	// Upper-Right quadrant
-	//if( abs( positionX - ( positionX + ( positionX / 2 ) ) <= 16/*Patch Width*/ ) )
-	//{
 	if( width <= 16.0f )
 	{
 		CollectNodeData( node, positionX, positionZ, width, device );
@@ -589,198 +580,7 @@ void CQuadTree::CreateTreeNode(NodeType* node, float positionX, float positionZ,
 	CreateTreeNode( ( node->nodes[1] = new NodeType ), positionX - ( width / 4 ), positionZ + ( width / 4 ), width / 2.0f, device );
 	CreateTreeNode( ( node->nodes[2] = new NodeType ), positionX + ( width / 4 ), positionZ - ( width / 4 ), width / 2.0f, device );
 	CreateTreeNode( ( node->nodes[3] = new NodeType ), positionX + ( width / 4 ), positionZ + ( width / 4 ), width / 2.0f, device );
-	
-	
-	// Count the number of triangles that are inside this node.
-	//numTriangles = CountTriangles(positionX, positionZ, width);
 
-	// Case 1: If there are no triangles in this node then return as it is empty and requires no processing.
-	/*if(numTriangles == 0)
-	{
-		return;
-	}*/
-
-/*	if( ( (positionX / 16.f) == 0.f ) &&  ( ( positionZ / 16.f ) == 0.f ) )
-	{
-		for( numTriangles > 8  )
-		{
-	*/	
-	
-	// Case 2: If there are too many triangles in this node then split it into four equal sized smaller tree nodes.
-	/*if(numTriangles > MAX_TRIANGLES)
-	{
-		for(i=0; i<4; i++)
-		{
-			// Calculate the position offsets for the new child node.
-			offsetX = (((i % 2) < 1) ? -1.0f : 1.0f) * (width / 4.0f);
-			offsetZ = (((i % 4) < 2) ? -1.0f : 1.0f) * (width / 4.0f);
-
-			// See if there are any triangles in the new node.
-			count = CountTriangles((positionX + offsetX), (positionZ + offsetZ), (width / 2.0f));
-			if(count > 0)
-			{
-				// If there are triangles inside where this new node would be then create the child node.
-				node->nodes[i] = new NodeType;
-
-				// Extend the tree starting from this new child node now.
-				CreateTreeNode(node->nodes[i], (positionX + offsetX), (positionZ + offsetZ), (width / 2.0f), device);
-			}
-		}
-
-		return;
-	}*/
-	/*
-	vertexIndex = 0;
-	for(i=0; i<31; i++)
-		{
-			for( int j = 0; j<31; j++)
-			{
-			node = new NodeType;
-
-			node->nodes[0] = NULL;
-			node->nodes[1] = NULL;
-			node->nodes[2] = NULL;
-			node->nodes[3] = NULL;
-			
-			// Case 3: If this node is not empty and the triangle count for it is less than the max then 
-			// this node is at the bottom of the tree so create the list of triangles to store in it.
-			//node->triangleCount = 2;//numTriangles;
-
-			// Calculate the number of vertices.
-			vertexCount = 2*3;//numTriangles * 3;
-
-			// Create the vertex array.
-			vertices = new VertexType[vertexCount];
-
-			// Create the index array.
-			indices = new unsigned long[vertexCount];
-
-			// Initialize the index for this new vertex and index array.
-			index = 0;
-
-	// Go through all the triangles in the vertex list.
-	////for(i=0; i<2024; i++)
-	//{
-		// If the triangle is inside this node then add it to the vertex array.
-		//result = IsTriangleContained(i, positionX, positionZ, width);
-		//if(result == true)
-		//{
-			// Calculate the index into the terrain vertex list.
-			//vertexIndex = i * j * 3;
-
-			// Get the three vertices of this triangle from the vertex list.
-			vertices[index].position = m_vertexList[vertexIndex].position;
-			vertices[index].texture = m_vertexList[vertexIndex].texture;
-			vertices[index].normal = m_vertexList[vertexIndex].normal;
-
-			node->heightList.x = vertices[index].position.y;
-
-			indices[index] = index;
-			index++;
-
-			vertexIndex++;
-			vertices[index].position = m_vertexList[vertexIndex].position;
-			vertices[index].texture = m_vertexList[vertexIndex].texture;
-			vertices[index].normal = m_vertexList[vertexIndex].normal;
-
-			node->heightList.y = vertices[index].position.y;
-
-			indices[index] = index;
-			index++;
-
-			vertexIndex++;
-			vertices[index].position = m_vertexList[vertexIndex].position;
-			vertices[index].texture = m_vertexList[vertexIndex].texture;
-			vertices[index].normal = m_vertexList[vertexIndex].normal;
-			indices[index] = index;
-						
-			node->positionX = vertices[index].position.x;
-			node->positionY = vertices[index].position.y;
-			node->positionZ = vertices[index].position.z;
-			
-			node->heightList.z = vertices[index].position.y;
-
-			index++;///
-
-
-			// Get the three vertices of this triangle from the vertex list.
-			vertexIndex++;
-			vertices[index].position = m_vertexList[vertexIndex].position;
-			vertices[index].texture = m_vertexList[vertexIndex].texture;
-			vertices[index].normal = m_vertexList[vertexIndex].normal;
-
-			indices[index] = index;
-			index++;
-
-			vertexIndex++;
-			vertices[index].position = m_vertexList[vertexIndex].position;
-			vertices[index].texture = m_vertexList[vertexIndex].texture;
-			vertices[index].normal = m_vertexList[vertexIndex].normal;
-			indices[index] = index;
-			index++;
-
-			vertexIndex++;
-			vertices[index].position = m_vertexList[vertexIndex].position;
-			vertices[index].texture = m_vertexList[vertexIndex].texture;
-			vertices[index].normal = m_vertexList[vertexIndex].normal;
-			indices[index] = index;
-
-			node->heightList.w = vertices[index].position.y;
-
-			vertexIndex++;
-			index++;
-		//}
-	//}
-			m_nodeVertices[++m_numberOfNodeVertices].position = D3DXVECTOR3(node->positionX, node->positionY, node->positionZ);
-			m_nodeIndices[m_numberOfNodeVertices] = m_numberOfNodeVertices;
-
-			// Set up the description of the vertex buffer.
-			vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
-			vertexBufferDesc.ByteWidth = sizeof(VertexType) * vertexCount;
-			vertexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-			vertexBufferDesc.CPUAccessFlags = 0;
-			vertexBufferDesc.MiscFlags = 0;
-			vertexBufferDesc.StructureByteStride = 0;
-
-			// Give the subresource structure a pointer to the vertex data.
-			vertexData.pSysMem = vertices;
-			vertexData.SysMemPitch = 0;
-			vertexData.SysMemSlicePitch = 0;
-
-			// Now finally create the vertex buffer.
-			device->CreateBuffer(&vertexBufferDesc, &vertexData, &node->vertexBuffer);
-
-			// Set up the description of the index buffer.
-			indexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
-			indexBufferDesc.ByteWidth = sizeof(unsigned long) * vertexCount;
-			indexBufferDesc.BindFlags = D3D11_BIND_INDEX_BUFFER;
-			indexBufferDesc.CPUAccessFlags = 0;
-			indexBufferDesc.MiscFlags = 0;
-			indexBufferDesc.StructureByteStride = 0;
-
-			// Give the subresource structure a pointer to the index data.
-			indexData.pSysMem = indices;
-			indexData.SysMemPitch = 0;
-			indexData.SysMemSlicePitch = 0;
-
-			// Create the index buffer.
-			device->CreateBuffer(&indexBufferDesc, &indexData, &node->indexBuffer);
-
-			delete [] vertices;
-			vertices = 0;
-
-			delete [] indices;
-			indices = 0;
-
-			m_CQuadTreeScene.insert( m_CQuadTreeScene.begin(), node);
-
-				//node->nodes[0] = new NodeType;
-				//node = node->nodes[0];
-			}
-	}
-
-	node->nodes[0] = first;
-	*/
 	return;
 }
 
@@ -959,7 +759,7 @@ void CQuadTree::RenderNode(NodeType* node,
 
 void CQuadTree::RenderScene(){}
 
-void CQuadTree::RenderScene(ID3D11DeviceContext *deviceContext, 
+void CQuadTree::RenderScene( ID3D11DeviceContext *deviceContext, 
 							CDirect3DSystem* d3d, 
 							CTerrain *terrain,
 							CTerrainShader *terrainShader,
@@ -971,7 +771,7 @@ void CQuadTree::RenderScene(ID3D11DeviceContext *deviceContext,
 							D3DXVECTOR3 cameraDirection,
 							D3DXVECTOR3 cameraLocation,
 							unsigned long time,
-							CLight *light)
+							CLight *light )
 {
 	// Set vertex buffer stride and offset.
     unsigned int stride = sizeof(VertexType); 
@@ -1039,10 +839,6 @@ void CQuadTree::RenderScene(ID3D11DeviceContext *deviceContext,
 	{
 		cameraDirection = D3DXVECTOR3( 1, 1, 1 );
 	}
-	
-	/*cameraDirection = D3DXVECTOR3( ( cameraDirection.x + cameraDirection.y ) / 2.f,
-		( cameraDirection.x + cameraDirection.y ) / 2.f, 
-		( cameraDirection.x + cameraDirection.y ) / 2.f );*/
 
 	cameraDirection *= .6;
 
@@ -1182,26 +978,26 @@ int CQuadTree::GetHeightAtPointXY(float posX, float posZ, NodeType* node)
 		{
 			if( posX - node->positionX < posZ - node->positionZ )
 			{	 
-				rayQueryTriangle[0] = D3DXVECTOR3( 0/*patch width divided by 2*/, 
+				rayQueryTriangle[0] = D3DXVECTOR3( 0, 
 					node->heightList._11 , 
 					8 );
-				rayQueryTriangle[1] = D3DXVECTOR3( 8/*patch width divided by 2*/, 
+				rayQueryTriangle[1] = D3DXVECTOR3( 8, 
 					node->heightList._12 , 
 					8 );
-				rayQueryTriangle[2] = D3DXVECTOR3( 0/*patch width divided by 2*/, 
+				rayQueryTriangle[2] = D3DXVECTOR3( 0, 
 					node->heightList._13 , 
 					0 );
 				
 			}
 			else
 			{
-				rayQueryTriangle[0] = D3DXVECTOR3( 0/*patch width divided by 2*/, 
+				rayQueryTriangle[0] = D3DXVECTOR3( 0, 
 					node->heightList._13 , 
 					0 );
-				rayQueryTriangle[1] = D3DXVECTOR3( 8/*patch width divided by 2*/, 
+				rayQueryTriangle[1] = D3DXVECTOR3( 8, 
 					node->heightList._12 , 
 					8 );
-				rayQueryTriangle[2] = D3DXVECTOR3( 8/*patch width divided by 2*/, 
+				rayQueryTriangle[2] = D3DXVECTOR3( 8, 
 					node->heightList._14 , 
 					0 );
 			}

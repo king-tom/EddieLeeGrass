@@ -177,16 +177,16 @@ void CPosition::MoveUpward(bool keydown)
 	// Update the upward speed movement based on the frame time and whether the user is holding the key down or not.
 	if(keydown)
 	{
-		m_upwardSpeed += m_frameTime * .08f;
+		m_upwardSpeed += m_frameTime * .008f;
 
-		if(m_upwardSpeed > (m_frameTime * .10f))
+		if(m_upwardSpeed > (m_frameTime * .01f))
 		{
-			m_upwardSpeed = m_frameTime * .10f;
+			m_upwardSpeed = m_frameTime * .01f;
 		}
 	}
 	else
 	{
-		m_upwardSpeed -= m_frameTime * .02f;
+		m_upwardSpeed -= m_frameTime * .002f;
 
 		if(m_upwardSpeed < 0.0f)
 		{
@@ -206,16 +206,16 @@ void CPosition::MoveDownward(bool keydown)
 	// Update the downward speed movement based on the frame time and whether the user is holding the key down or not.
 	if(keydown)
 	{
-		m_downwardSpeed += m_frameTime * .08f;
+		m_downwardSpeed += m_frameTime * .008f;
 
-		if(m_downwardSpeed > (m_frameTime * .10f))
+		if(m_downwardSpeed > (m_frameTime * .01f))
 		{
-			m_downwardSpeed = m_frameTime * .10f;
+			m_downwardSpeed = m_frameTime * .01f;
 		}
 	}
 	else
 	{
-		m_downwardSpeed -= m_frameTime * .02f;
+		m_downwardSpeed -= m_frameTime * .002f;
 
 		if(m_downwardSpeed < 0.0f)
 		{

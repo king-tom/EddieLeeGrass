@@ -10,12 +10,12 @@
 #include <dinput.h>
 
 
-class InputClass
+class CClass
 {
 public:
-	InputClass();
-	InputClass(const InputClass&);
-	~InputClass();
+	CClass();
+	CClass(const CClass&);
+	~CClass();
 
 	bool Initialize(HINSTANCE, HWND, int, int);
 	void Shutdown();
@@ -30,6 +30,7 @@ public:
 	bool IsDownPressed();
 	bool IsAPressed();
 	bool IsZPressed();
+	bool IsXPressed();
 	bool IsPgUpPressed();
 	bool IsPgDownPressed();
 	bool IsLShiftPressed();

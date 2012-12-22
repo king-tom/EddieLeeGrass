@@ -1,6 +1,3 @@
-////////////////////////////////////////////////////////////////////////////////
-// Filename: Camera.cpp
-////////////////////////////////////////////////////////////////////////////////
 #include "CCamera.h"
 
 
@@ -13,6 +10,8 @@ CCamera::CCamera()
 	m_rotationX = 0.0f;
 	m_rotationY = 0.0f;
 	m_rotationZ = 0.0f;
+
+	m_updateTerrainHeight = true;
 }
 
 
@@ -104,4 +103,14 @@ void CCamera::GetViewMatrix(D3DXMATRIX& viewMatrix)
 {
 	viewMatrix = m_viewMatrix;
 	return;
+}
+
+bool CCamera::IsUpdateTerrainHeight()
+{
+	return m_updateTerrainHeight;
+}
+
+void CCamera::SetIsUpdateTerrainHeight()
+{
+	m_updateTerrainHeight = !m_updateTerrainHeight;
 }

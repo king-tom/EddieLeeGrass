@@ -1,6 +1,3 @@
-////////////////////////////////////////////////////////////////////////////////
-// Filename: CSkydome.cpp
-////////////////////////////////////////////////////////////////////////////////
 #include "CGrass.h"
 
 
@@ -16,25 +13,7 @@ CGrass::CGrass(const CGrass& other) : m_numberOfBlades( 0 ) { }
 bool CGrass::Initialize( ID3D11Device* device )
 {
 	bool result;
-	/*
-	// Calculate the normals for the terrain data.
-	result = CalculateNormals();
-	if(!result)
-	{
-		return false;
-	}
 
-	// Calculate the texture coordinates.
-	CalculateTextureCoordinates();
-
-	// Load the texture.
-	result = LoadTexture(device, textureFilename);
-	if(!result)
-	{
-	//	return false;
-	}
-
-	*/
 
 	// Initialize the vertex and index buffer that hold the geometry for the terrain.
 	result = InitializeBuffers( device );
@@ -70,7 +49,7 @@ bool CGrass::InitializeBuffers( ID3D11Device *device )
 	//m_vertexCount++;
 	//m_vertexCount /= 3;
 
-		// Set up the description of the static vertex buffer.
+	// Set up the description of the static vertex buffer.
     vertexBufferDesc.Usage = D3D11_USAGE_DEFAULT;
     vertexBufferDesc.ByteWidth = sizeof(VertexType) * m_numberOfBlades;
     vertexBufferDesc.BindFlags = D3D11_BIND_VERTEX_BUFFER;
