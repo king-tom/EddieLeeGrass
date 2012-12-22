@@ -1,5 +1,9 @@
-﻿Build started 12/21/2012 6:27:59 PM.
+﻿Build started 12/22/2012 12:43:28 AM.
+     1>Project "E:\dev\LeeGrass\build\vs\LeeGrass.vcxproj" on node 2 (Clean target(s)).
+     1>_PrepareForClean:
+         Deleting file "Release\LeeGrass.lastbuildstate".
+     1>Done Building Project "E:\dev\LeeGrass\build\vs\LeeGrass.vcxproj" (Clean target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.00
+Time Elapsed 00:00:00.02
